@@ -1,0 +1,28 @@
+# - * - coding : utf - 8 - * -
+#
+import os
+
+dirName = "/home/flychen59/CUT/datasets/Mapillary2/"
+
+list_img_name = []
+list_read_img = []
+
+
+def delete_end_str(path):
+    filelist = os.listdir(path)
+    for filename in filelist:
+        filename = path + filename
+        list_img_name.append(filename)
+
+        new_file_name = filename.split(".jpg")[0]
+        list_read_img.append(new_file_name)
+        list_read_img.sort()
+    seq=0
+    for i in range(len(list_read_img)):
+        old_img_name = list_read_img[i] + ".jpg"
+        new_file_name = path +'berlin'+'{:06d}'.format(seq)+str(i) + "_labelids.jpg"
+        os.rename(old_img_name, new_file_name)
+        seq+=1
+
+
+delete_end_str(dirName)
